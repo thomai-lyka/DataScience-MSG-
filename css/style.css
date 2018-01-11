@@ -1,0 +1,14 @@
+#rcorners1 {
+    border-radius: 25px;
+    background: rgb(42, 187, 13);
+    padding: 20px; 
+    width: 40%;
+    height: auto; 
+}
+#rcorners2 {
+    width: 40%;
+    border-radius: 25px;
+    background: #f11313;
+    padding: 20px; 
+    height: auto; 
+}

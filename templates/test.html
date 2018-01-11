@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+        
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <script  type="text/javascript" src="js/typeahead.bundle.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.26/jquery.autocomplete.min.js"></script>
+        <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.css" rel="stylesheet"/>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
+        <script type=text/javascript>
+        
+        
+            $(function() {
+                 $('a#process_input').bind('click', function() {
+                   $.getJSON('/background_process1', {
+                     proglang: $('input[name="names"]').val(),proglang1: $('input[name="songs"]').val(),
+                   }, function(data) {
+                     $("#result").text(data.result);
+                   });
+                   return false;
+                 });
+               });
+          ;
+       </script>
+
+
+      </head>
+      
+      <body>
+        <div class="container">
+                <div class="bs-example"> 
+                    <form>  
+                    Ingredients:
+                    <input type="text" class="form-control autocomplete" name="names" id="autocomplete1" placeholder="Enter ingredient"/>
+                </div>
+                <div class="form-group ui-widget"> 
+                    Amount of Ingredients:
+                    <input type="text" name="songs" id="autocomplete2" placeholder="Enter amount"/>
+
+                    <a href=# id=process_input><button type="button" class="btn btn-primary">Submit</button></a>
+                    <p id=result></p>
+                    </form>
+                </div>
+            </div>
+        <script>
+        $('#autocomplete1').autocomplete({
+            serviceUrl: '/search/names',
+            dataType: 'json',
+            onSearchComplete: function (query, suggestions) {
+              console.log(query);
+            }
+        });
+      
+        $('#autocomplete2').autocomplete({
+            serviceUrl: '/search/songs',
+            dataType: 'json',
+            onSearchComplete: function (query, suggestions) {
+              console.log(query);
+            }
+        });
+        </script>
+
+    <div class='container'>
+        <form>
+            <input type=text size=5 name=proglang>
+            <a href=# id=process_input><button class='btn btn-default'>Submit</button></a>
+        </form>
+    <p id=result></p>
+    </div>
+
+    <br>
+    This table contains what the the user have already eaten
+      <table border="1" cellpadding="5" cellspacing="5">
+        {% for row in data %}
+            <tr>
+            {% for d in row %}
+                <td>{{ d }}</td>
+            {% endfor %}
+            </tr>
+        {% endfor %}
+      </table>
+
+
+      </body>
+</html>
